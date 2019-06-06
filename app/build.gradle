@@ -1,0 +1,221 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+def addFieldsAndPlaceholders = { flavor, items ->
+    for (def item : items) {
+        flavor.buildConfigField "String", item.key, '"' + item.value + '"'
+    }
+    flavor.addManifestPlaceholders(items)
+}
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.yiqi.news"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        multiDexEnabled true
+
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+//            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            abiFilters "armeabi-v7a"
+        }
+
+        addFieldsAndPlaceholders(it, [
+                APP_ID_WECHAT: "wx31e917f39ca4dce1",
+                APP_ID_QQ    : "222222",
+                APP_ID_BUGLY : "d28e2c0ddd"
+        ])
+
+    }
+
+    signingConfigs {
+
+        debug {
+            keyAlias 'huizealias'
+            keyPassword '123456'
+            storePassword '123456'
+            storeFile file('release.keystore')
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        release {
+            keyAlias 'huizealias'
+            keyPassword '123456'
+            storePassword '123456'
+            storeFile file('release.keystore')
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug {
+
+            addFieldsAndPlaceholders(it, [
+//                    "BASE_URL": "http://192.168.31.95:8081/yiqi-api/"//汤杰
+//                    "BASE_URL": "http://192.168.1.136:8089/yiqi-api/"//肖佳皓
+"BASE_URL": "http://192.168.31.234:8089/yiqi-api/"//刘强
+            ])
+
+            manifestPlaceholders = [
+                    JPush: "99f7fecc2b3d393e51162b39"
+            ]
+
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+
+            addFieldsAndPlaceholders(it, [
+                    "BASE_URL": "http://47.107.101.26:8081/yiqi-api/"
+            ])
+
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig = signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //support
+    implementation rootProject.ext.dependencies["cardview-v7"]
+
+    //tools
+    //注意 Arms 核心库现在并不会依赖某个 EventBus, 要想使用 EventBus, 还请在项目中自行依赖对应的 EventBus
+    //现在支持两种 EventBus, greenrobot 的 EventBus 和畅销书 《Android源码设计模式解析与实战》的作者 何红辉 所作的 AndroidEventBus
+    //依赖后 Arms 会自动检测您依赖的 EventBus 并自动注册
+    //建议使用 AndroidEventBus, 特别是组件化项目, 原因请看 https://github.com/hehonghui/AndroidEventBus/issues/49
+    //这种做法可以让使用者有自行选择三方库的权利, 并且还可以减轻 Arms 的体积
+    implementation rootProject.ext.dependencies["androideventbus"]
+//    implementation rootProject.ext.dependencies["eventbus"]
+
+    kapt rootProject.ext.dependencies["dagger2-compiler"]
+    implementation rootProject.ext.dependencies["progressmanager"]
+    implementation rootProject.ext.dependencies["retrofit-url-manager"]
+    implementation rootProject.ext.dependencies["lifecyclemodel"]
+
+    //view
+    kapt(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+    }
+    implementation rootProject.ext.dependencies["paginate"]
+
+    //arms
+    implementation project(':arms')
+//    implementation 'me.jessyan:arms:2.5.0'
+
+    //Arms 核心库不再包含 AndroidAutoLayout, 现在可自行选择屏幕适配方案, 不想使用 AndroidAutoLayout 就不要依赖 arms-autolayout
+//    implementation 'me.jessyan:arms-autolayout:2.5.0'
+
+    //现在已经将 Demo 中的屏幕适配框架从 AndroidAutoLayout 替换为 AndroidAutoSize, AndroidAutoLayout 和 AndroidAutoSize 可以在项目中共存
+    //所以旧项目只要依赖 arms-autolayout 即可兼容之前的旧页面, 新页面可以使用 AndroidAutoSize 进行适配, 等有时间了再将旧页面全部替换为 AndroidAutoSize
+    implementation rootProject.ext.dependencies["autosize"]
+
+    //Arms 核心库不再包含 Glide, 想使用其他图片加载框架或者想自行扩展 ImageLoaderStrategy 就不要依赖 arms-imageloader-glide
+    //依赖 arms-imageloader-glide 后还需要在 GlobalConfiguration 中手动注册 GlideImageLoaderStrategy
+    implementation 'me.jessyan:arms-imageloader-glide:2.5.0'
+
+    //test
+    testImplementation rootProject.ext.dependencies["junit"]
+    debugImplementation rootProject.ext.dependencies["canary-debug"]
+    releaseImplementation rootProject.ext.dependencies["canary-release"]
+    testImplementation rootProject.ext.dependencies["canary-release"]
+    implementation rootProject.ext.dependencies["kotlin"]
+    implementation rootProject.ext.dependencies["kotlin-coroutines-core"]
+
+    //解决64K
+    implementation rootProject.ext.dependencies["multidex"]
+
+    //各种round控件
+    implementation rootProject.ext.dependencies["flyco-roundview"]
+
+    //dialog-SDK
+    implementation rootProject.ext.dependencies["flyco-dialog"]
+
+    //上拉刷新下拉加载
+    implementation rootProject.ext.dependencies["smartrefresh"]
+
+    //上拉刷新下拉加载-header
+    implementation rootProject.ext.dependencies["smartrefresh-header"]
+
+    //adapter-SDk
+    implementation rootProject.ext.dependencies["base-recycler-view-adapter"]
+
+    //design
+    implementation rootProject.ext.dependencies["design"]
+
+    //rxbinding
+    implementation rootProject.ext.dependencies["rxbinding"]
+
+    //tablayout-SDK
+    implementation rootProject.ext.dependencies["flyco-tablayout"]
+
+    //banner图轮播(自己混淆)
+    implementation rootProject.ext.dependencies["banner"]
+
+    //圆角ImageView
+    implementation rootProject.ext.dependencies["roundedimageview"]
+
+    //侧滑删除
+    implementation rootProject.ext.dependencies["SwipeDelMenuLayout"]
+
+    //constraint-layout
+    implementation rootProject.ext.dependencies["constraint-layout"]
+
+    //pickerview选择器
+    implementation rootProject.ext.dependencies["pickerview"]
+
+    //pickerview选择器
+    implementation rootProject.ext.dependencies["flexbox"]
+
+    //微信sdk
+    implementation rootProject.ext.dependencies["wechat"]
+
+    //qq-sdk
+    implementation files('lib/open_sdk_r6019_lite.jar')
+
+    //视频播放器
+    implementation rootProject.ext.dependencies["gsyVideoPlayer"]
+
+    //是否需要ExoPlayer模式
+    implementation rootProject.ext.dependencies["GSYVideoPlayer-exo2"]
+
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.0'
+
+    implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
+
+    implementation files('lib/alipaySdk-20180403.jar')
+}

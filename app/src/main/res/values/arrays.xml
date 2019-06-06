@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_title">
+        <item>新闻</item>
+        <item>视频</item>
+        <item>我的</item>
+    </string-array>
+    <string-array name="tab_normal">
+        <item>@mipmap/ic_bottombar_news_unselect</item>
+        <item>@mipmap/ic_bottombar_video_unselect</item>
+        <item>@mipmap/ic_bottombar_user_unselect</item>
+    </string-array>
+
+    <string-array name="tab_selected">
+        <item>@mipmap/ic_bottombar_news_selected</item>
+        <item>@mipmap/ic_bottombar_video_select</item>
+        <item>@mipmap/ic_bottombar_user_selected</item>
+    </string-array>
+</resources>
