@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import butterknife.OnClick
 
 import com.jess.arms.base.BaseFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
+import com.yiqi.huize.loadImage
 
 import com.yiqi.news.di.component.DaggerUserComponent
 import com.yiqi.news.di.module.UserModule
@@ -18,34 +21,19 @@ import com.yiqi.news.mvp.contract.UserContract
 import com.yiqi.news.mvp.presenter.UserPresenter
 
 import com.yiqi.news.R
+import com.yiqi.news.app.ui.QMUITipDialog
+import com.yiqi.news.mvp.ui.activity.WithdrawActivity
+import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.fragment_user.*
 
 
-/**
- * ================================================
- * Description:
- * <p>
- * Created by MVPArmsTemplate on 06/06/2019 15:43
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
- * <a href="https://github.com/JessYanCoding/MVPArms/wiki">See me</a>
- * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
- * ================================================
- */
-/**
- * 如果没presenter
- * 你可以这样写
- *
- * @FragmentScope(請注意命名空間) class NullObjectPresenterByFragment
- * @Inject constructor() : IPresenter {
- * override fun onStart() {
- * }
- *
- * override fun onDestroy() {
- * }
- * }
- */
 class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
+
+
+    override fun lazyFetchData() {
+
+    }
+
     companion object {
         fun newInstance(): UserFragment {
             val fragment = UserFragment()
@@ -53,6 +41,12 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
         }
     }
 
+    private val mQMUIInfoDialog: QMUITipDialog by lazy {
+        return@lazy QMUITipDialog.Builder(mContext)
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
+                .setTipWord("复制邀请码成功")
+                .create()
+    }
 
     override fun setupFragmentComponent(appComponent: AppComponent) {
         DaggerUserComponent //如找不到该类,请编译一下项目
@@ -68,66 +62,24 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        iv_user_avatar.loadImage("http://img3.imgtn.bdimg.com/it/u=3914950518,3569645197&fm=26&gp=0.jpg")
     }
 
-    /**
-     * 通过此方法可以使 Fragment 能够与外界做一些交互和通信, 比如说外部的 Activity 想让自己持有的某个 Fragment 对象执行一些方法,
-     * 建议在有多个需要与外界交互的方法时, 统一传 {@link Message}, 通过 what 字段来区分不同的方法, 在 {@link #setData(Object)}
-     * 方法中就可以 {@code switch} 做不同的操作, 这样就可以用统一的入口方法做多个不同的操作, 可以起到分发的作用
-     * <p>
-     * 调用此方法时请注意调用时 Fragment 的生命周期, 如果调用 {@link #setData(Object)} 方法时 {@link Fragment#onCreate(Bundle)} 还没执行
-     * 但在 {@link #setData(Object)} 里却调用了 Presenter 的方法, 是会报空的, 因为 Dagger 注入是在 {@link Fragment#onCreate(Bundle)} 方法中执行的
-     * 然后才创建的 Presenter, 如果要做一些初始化操作,可以不必让外部调用 {@link #setData(Object)}, 在 {@link #initData(Bundle)} 中初始化就可以了
-     * <p>
-     * Example usage:
-     * <pre>
-     *fun setData(data:Any) {
-     *   if(data is Message){
-     *       when (data.what) {
-     *           0-> {
-     *               //根据what 做你想做的事情
-     *           }
-     *           else -> {
-     *           }
-     *       }
-     *   }
-     *}
-     *
-     *
-     *
-     *
-     *
-     * // call setData(Object):
-     * val data = Message();
-     * data.what = 0;
-     * data.arg1 = 1;
-     * fragment.setData(data);
-     * </pre>
-     *
-     * @param data 当不需要参数时 {@code data} 可以为 {@code null}
-     */
     override fun setData(data: Any?) {
 
-    }
-
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
 
     }
 
     override fun showMessage(message: String) {
-        ArmsUtils.snackbarText(message)
-    }
-
-    override fun launchActivity(intent: Intent) {
-        ArmsUtils.startActivity(intent)
-    }
-
-    override fun killMyself() {
 
     }
+
+    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.tv_user_invited_code -> mQMUIInfoDialog.show()
+            R.id.btn_user_withdraw -> ArmsUtils.startActivity(WithdrawActivity::class.java )
+        }
+    }
+
 }

@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="MergeRootFrame">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_user_withdraw"
+        android:layout_height="188dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:paddingTop="32dp"
+            android:paddingLeft="16dp"
+            android:src="@mipmap/ic_common_toolbar_back"
+            android:layout_height="wrap_content"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前金币数"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7676"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                />
+
+            <com.flyco.roundview.RoundTextView
+                android:layout_width="120dp"
+                app:rv_backgroundColor="@color/colorWhite"
+                app:rv_cornerRadius="14dp"
+                android:text="立即提现"
+                android:textColor="@color/color_f04d22"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_marginTop="21dp"
+                android:layout_height="28dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="1000金币 = 1元"
+                android:textColor="@color/colorWhite"
+                android:textSize="10sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

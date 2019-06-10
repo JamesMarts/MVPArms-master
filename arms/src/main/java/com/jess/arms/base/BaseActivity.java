@@ -17,6 +17,7 @@ package com.jess.arms.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -126,8 +127,8 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
     protected void initImmersionBar() {
         mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar.
-        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false).init();
+        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false)
+                .init();
     }
 
 

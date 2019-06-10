@@ -109,6 +109,8 @@ dependencies {
     //test
     api rootProject.ext.dependencies["timber"]
     api rootProject.ext.dependencies["barlibrary"]
+
+    api 'com.github.GrenderG:Toasty:1.4.2'
 }
 
 apply from: '../bintray.gradle'

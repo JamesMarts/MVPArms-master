@@ -46,6 +46,10 @@ import com.yiqi.news.R
  * }
  */
 class VideoFragment : BaseFragment<VideoPresenter>(), VideoContract.View {
+    override fun lazyFetchData() {
+
+    }
+
     companion object {
         fun newInstance(): VideoFragment {
             val fragment = VideoFragment()

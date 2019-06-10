@@ -41,6 +41,8 @@ import com.jess.arms.integration.AppManager;
 
 import java.security.MessageDigest;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * ================================================
  * 一些框架常用的工具
@@ -51,7 +53,7 @@ import java.security.MessageDigest;
  * ================================================
  */
 public class ArmsUtils {
-    static public Toast mToast;
+    static public Toasty mToast;
 
     private ArmsUtils() {
         throw new IllegalStateException("you can't instantiate me!");
@@ -234,12 +236,22 @@ public class ArmsUtils {
      * @param string
      */
     public static void makeText(Context context, String string) {
-        if (mToast == null) {
-            mToast = Toast.makeText(context, string, Toast.LENGTH_SHORT);
-        }
-        mToast.setText(string);
-        mToast.show();
+            Toasty.normal(context, string).show();
     }
+
+    public static void makeSuccessText(Context context, String string) {
+        Toasty.success(context, string).show();
+    }
+    public static void makeErrorText(Context context, String string) {
+        Toasty.error(context, string).show();
+    }
+    public static void makeWaringText(Context context, String string) {
+        Toasty.warning(context, string).show();
+    }
+    public static void makeInfoText(Context context, String string) {
+        Toasty.info(context, string).show();
+    }
+
 
     /**
      * 使用 {@link Snackbar} 显示文本消息
