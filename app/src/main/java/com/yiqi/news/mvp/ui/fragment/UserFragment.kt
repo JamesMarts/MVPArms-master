@@ -44,7 +44,7 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
     private val mQMUIInfoDialog: QMUITipDialog by lazy {
         return@lazy QMUITipDialog.Builder(mContext)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
-                .setTipWord("复制邀请码成功")
+                .setTipWord("复制邀请码成功！")
                 .create()
     }
 
