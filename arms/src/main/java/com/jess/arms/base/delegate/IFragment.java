@@ -79,13 +79,25 @@ public interface IFragment {
      * @return
      */
     View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
-
+    /**
+     * 初始化数据
+     *
+     * @param
+     */
+    void initView();
     /**
      * 初始化数据
      *
      * @param savedInstanceState
      */
     void initData(@Nullable Bundle savedInstanceState);
+
+    /**
+     * 初始化数据
+     *
+     * @param
+     */
+    void initEvent();
 
     /**
      * 通过此方法可以使 Fragment 能够与外界做一些交互和通信, 比如说外部的 Activity 想让自己持有的某个 Fragment 对象执行一些方法,

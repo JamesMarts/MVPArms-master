@@ -1,13 +1,9 @@
 package com.yiqi.news.mvp.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Message
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import butterknife.OnClick
 
 import com.jess.arms.base.BaseFragment
@@ -21,15 +17,16 @@ import com.yiqi.news.mvp.contract.UserContract
 import com.yiqi.news.mvp.presenter.UserPresenter
 
 import com.yiqi.news.R
-import com.yiqi.news.app.ui.QMUITipDialog
+import com.yiqi.news.app.widget.qmui.QMUITipDialog
 import com.yiqi.news.mvp.ui.activity.WithdrawActivity
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_user.*
 
 
 class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
 
+    override fun initEvent() {
 
+    }
     override fun lazyFetchData() {
 
     }
@@ -44,7 +41,7 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
     private val mQMUIInfoDialog: QMUITipDialog by lazy {
         return@lazy QMUITipDialog.Builder(mContext)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
-                .setTipWord("复制邀请码成功！")
+                .setTipWord(getString(R.string.dialog_copy_code_success))
                 .create()
     }
 
@@ -56,7 +53,9 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
                 .build()
                 .inject(this)
     }
+    override fun initView() {
 
+    }
     override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_user, container, false);
     }

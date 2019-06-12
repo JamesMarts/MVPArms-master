@@ -1,8 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="新闻"
+                android:textColor="@color/color_414141"
+                android:textSize="19sp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/iv_news_search"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="12dp"
+                    android:src="@mipmap/ic_toolbar_caalendar" />
+
+                <ImageView
+                    android:id="@+id/iv_news_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right|end"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="15dp"
+                    android:src="@mipmap/ic_toolbar_search" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tl_news"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="4dp"
+        app:tl_indicator_bounce_enable="true"
+        app:tl_indicator_height="1dp"
+        app:tl_indicator_width="0dp"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_padding="13dp"
+        app:tl_textSelectColor="@color/color_a22217"
+        app:tl_textUnselectColor="@color/color_979797"
+        app:tl_textsize="15sp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -1,1 +1,1 @@
-include ':app', ':arms', ':arms-imageloader-glide'
+include ':app', ':arms', ':arms-imageloader-glide', ':FlycoTabLayout_Lib', ':uikit'

@@ -1,16 +1,18 @@
 package com.yiqi.news.mvp.presenter
 
 import android.app.Application
+import android.support.v4.app.Fragment
+import com.flyco.tablayout.listener.CustomTabEntity
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.FragmentScope
 import com.jess.arms.mvp.BasePresenter
 import com.jess.arms.http.imageloader.ImageLoader
+import com.yiqi.news.R
 import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.yiqi.news.mvp.contract.VideoContract
-
 
 /**
  * ================================================
@@ -41,5 +43,10 @@ constructor(model: VideoContract.Model, rootView: VideoContract.View) :
 
     override fun onDestroy() {
         super.onDestroy();
+    }
+
+    fun getTabData() {
+        val titles = mApplication.resources.getStringArray(R.array.channel)
+        mRootView.getTabVideoData(titles)
     }
 }

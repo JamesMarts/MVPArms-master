@@ -48,7 +48,7 @@ constructor(model: MainContract.Model, rootView: MainContract.View) :
 
 
     override fun onDestroy() {
-        super.onDestroy();
+        super.onDestroy()
     }
 
     fun requestTab() {

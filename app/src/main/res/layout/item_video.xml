@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingBottom="18dp"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="186dp">
+
+        <ImageView
+            android:id="@+id/iv_video_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <com.flyco.roundview.RoundTextView
+            android:layout_width="46dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="02:00"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            app:rv_backgroundColor="@color/color_414141"
+            app:rv_cornerRadius="4dp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingMultiplier="1.2"
+        android:text="逛遍豆瓣小组，终于读懂年轻人的“圈子文化”和“标签哲学”"
+        android:textColor="@color/color_414141"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#教育"
+            android:textColor="@color/color_979797"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="122浏览"
+            android:textColor="@color/color_979797"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="1小时前"
+            android:textColor="@color/color_979797"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

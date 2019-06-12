@@ -26,4 +26,15 @@ fun Fragment.px2dp(value: Int) = this.activity?.px2dp(value) ?: 0
 fun View.px2dp(value: Int) = this.context.px2dp(value)
 
 
-
+/**
+ * 将sp值转换为px值，保证文字大小不变
+ *
+ * @param spValue
+ * @param fontScale
+ * （DisplayMetrics类中属性scaledDensity）
+ * @return
+ */
+fun sp2px(context: Context, spValue: Int): Float {
+    val fontScale = context.resources.displayMetrics.scaledDensity
+    return (spValue * fontScale + 0.5f)
+}

@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/colorWhite</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/Animation_Activity</item>
+        <item name="android:fontFamily">@font/font_style</item>
     </style>
 
     <style name="Animation_Activity">

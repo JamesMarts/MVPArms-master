@@ -15,6 +15,8 @@
  */
 package com.yiqi.news.mvp.model.api;
 
+import com.yiqi.news.BuildConfig;
+
 /**
  * ================================================
  * 存放一些与 API 有关的东西,如请求地址,请求码等
@@ -25,6 +27,6 @@ package com.yiqi.news.mvp.model.api;
  * ================================================
  */
 public interface Api {
-    String APP_DOMAIN = "https://api.github.com";
+    String APP_DOMAIN = BuildConfig.BASE_URL;
     String RequestSuccess = "0";
 }

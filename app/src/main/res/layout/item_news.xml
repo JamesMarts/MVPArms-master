@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="12dp"
+    android:background="@color/colorWhite"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/iv_news_thumb"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginRight="15dp"
+            android:lineSpacingMultiplier="1.2"
+            tools:text="逛遍豆瓣小组，终于读懂年轻人的“圈子文化”和“标签哲学”"
+            android:textColor="@color/color_414141"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#教育"
+                android:textColor="@color/color_979797"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_news_read_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:text="122浏览"
+                android:textColor="@color/color_979797"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_news_read_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:text="1小时前"
+                android:textColor="@color/color_979797"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_news_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:src="@mipmap/ic_news_deletenor" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_news_thumb"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="18dp"
+        android:src="@mipmap/ic_splash" />
+
+</RelativeLayout>

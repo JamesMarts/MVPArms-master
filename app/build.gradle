@@ -28,7 +28,13 @@ android {
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         multiDexEnabled true
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
 //            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
@@ -69,7 +75,7 @@ android {
             addFieldsAndPlaceholders(it, [
 //                    "BASE_URL": "http://192.168.31.95:8081/yiqi-api/"//汤杰
 //                    "BASE_URL": "http://192.168.1.136:8089/yiqi-api/"//肖佳皓
-"BASE_URL": "http://192.168.31.234:8089/yiqi-api/"//刘强
+                      "BASE_URL": "http://is.snssdk.com/"//刘强
             ])
 
             manifestPlaceholders = [
@@ -87,7 +93,7 @@ android {
         release {
 
             addFieldsAndPlaceholders(it, [
-                    "BASE_URL": "http://47.107.101.26:8081/yiqi-api/"
+                    "BASE_URL": "http://is.snssdk.com/"
             ])
 
             buildConfigField "boolean", "LOG_DEBUG", "false"
@@ -181,7 +187,8 @@ dependencies {
     implementation rootProject.ext.dependencies["rxbinding"]
 
     //tablayout-SDK
-    implementation rootProject.ext.dependencies["flyco-tablayout"]
+    implementation project(':FlycoTabLayout_Lib')
+    implementation project(':uikit')
 
     //banner图轮播(自己混淆)
     implementation rootProject.ext.dependencies["banner"]

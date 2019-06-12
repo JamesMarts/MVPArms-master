@@ -61,12 +61,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         finish()
     }
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        mImmersionBar.statusBarDarkFont(true).init()
-    }
 
     override fun useImmersionBar(): Boolean? = true
+
+
 
     override fun initTab(fragments: Array<Fragment>, tabLayout: ArrayList<CustomTabEntity>) {
         tab_home.setTabData(tabLayout, this, R.id.fl_change, fragments.toList() as ArrayList<Fragment>)

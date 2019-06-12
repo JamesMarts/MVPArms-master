@@ -31,9 +31,7 @@ fun View.onClick(method: () -> Unit): View {
     return this
 }
 
-fun getDesignatedView(context: Context, layout: Int, root: View?): View {
-    return LayoutInflater.from(context).inflate(layout, if (root == null) null else root!!.parent as ViewGroup, false)
-}
+
 
 /**
  * 点击事件扩展方法

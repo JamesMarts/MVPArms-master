@@ -18,6 +18,8 @@ import com.yiqi.news.mvp.contract.NewsContract
 import com.yiqi.news.mvp.presenter.NewsPresenter
 
 import com.yiqi.news.R
+import kotlinx.android.synthetic.main.fragment_news.*
+import java.util.ArrayList
 
 
 /**
@@ -46,6 +48,19 @@ import com.yiqi.news.R
  * }
  */
 class NewsFragment : BaseFragment<NewsPresenter>(), NewsContract.View {
+    override fun initView() {
+
+    }
+
+
+    override fun getTabNewsData(tabs: Array<String>, fragment: ArrayList<Fragment>) {
+        tl_news.setFragmentViewPager(vp, tabs, this, fragment)
+    }
+
+    override fun initEvent() {
+
+    }
+
     override fun lazyFetchData() {
     }
 
@@ -72,7 +87,7 @@ class NewsFragment : BaseFragment<NewsPresenter>(), NewsContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        mPresenter?.getTabData()
     }
 
     override fun setData(data: Any?) {
@@ -98,5 +113,13 @@ class NewsFragment : BaseFragment<NewsPresenter>(), NewsContract.View {
     override fun killMyself() {
 
     }
+
+    override fun initImmersionBar() {
+        super.initImmersionBar()
+        mImmersionBar.statusBarDarkFont(true).init()
+        mImmersionBar.titleBar(rl_title).init()
+    }
+
+    override fun useImmersionBar(): Boolean? = true
 
 }

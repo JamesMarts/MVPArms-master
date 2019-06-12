@@ -59,6 +59,9 @@ import tv.danmaku.ijk.media.exo2.Exo2PlayerManager;
 public class BaseApplication extends MultiDexApplication implements App {
     private AppLifecycles mAppDelegate;
 
+    //以下属性应用于整个应用程序，合理利用资源，减少资源浪费
+    private static Context mContext;//上下文
+
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化
      * 常用于 MultiDex 以及插件化框架的初始化
@@ -76,14 +79,22 @@ public class BaseApplication extends MultiDexApplication implements App {
     @Override
     public void onCreate() {
         super.onCreate();
+
         if (mAppDelegate != null)
             this.mAppDelegate.onCreate(this);
 
+        //对全局属性赋值
+        mContext = getApplicationContext();
         initBugly();
         initSmartRefresh();
         initDetectFileUriExposure();
         initGsyExo();
     }
+
+    public static Context getContext() {
+        return mContext;
+    }
+
 
     private void initBugly() {
         Bugly.init(getApplicationContext(), "af6608915e", false);

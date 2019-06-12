@@ -70,7 +70,9 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onActivityCreate(@Nullable Bundle savedInstanceState) {
+        iFragment.initView();
         iFragment.initData(savedInstanceState);
+        iFragment.initEvent();
     }
 
     @Override

@@ -28,6 +28,7 @@ import android.view.InflateException;
 import android.view.View;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.jess.arms.R;
 import com.jess.arms.base.delegate.IActivity;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
@@ -129,6 +130,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false)
                 .init();
+        mImmersionBar.navigationBarColorTransform(R.color.defaultTextColor).init();
     }
 
 

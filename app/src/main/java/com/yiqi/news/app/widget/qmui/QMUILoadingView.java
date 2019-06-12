@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yiqi.news.app.ui;
+package com.yiqi.news.app.widget.qmui;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
