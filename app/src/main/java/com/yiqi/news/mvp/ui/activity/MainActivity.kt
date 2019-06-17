@@ -20,7 +20,6 @@ import java.util.ArrayList
 
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
-
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
                 .builder()
@@ -41,18 +40,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     }
 
 
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
-
-    }
-
-    override fun showMessage(message: String) {
-
-    }
-
     override fun launchActivity(intent: Intent) {
         ArmsUtils.startActivity(intent)
     }
@@ -61,13 +48,14 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
         finish()
     }
 
+    override fun initTab(fragments: Array<Fragment>, tabLayout: ArrayList<CustomTabEntity>) {
+        tab_home.setTabData(tabLayout, this, R.id.fl_change, fragments.toList() as ArrayList<Fragment>)
+    }
 
     override fun useImmersionBar(): Boolean? = true
 
+    override fun showMessage(message: String) {
 
-
-    override fun initTab(fragments: Array<Fragment>, tabLayout: ArrayList<CustomTabEntity>) {
-        tab_home.setTabData(tabLayout, this, R.id.fl_change, fragments.toList() as ArrayList<Fragment>)
     }
 
     private var exitTime: Long = 0
@@ -78,7 +66,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
                 exitTime = System.currentTimeMillis()
             } else {
                 finish()
-               ArmsUtils.exitApp()
+                ArmsUtils.exitApp()
             }
             return true
         }

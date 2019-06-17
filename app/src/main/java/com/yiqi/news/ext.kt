@@ -169,6 +169,7 @@ fun ImageView.loadImage(url: String?, placeholder: Int, error: Int) {
                 .loadImage(this.context, it
                         .url(url)
                         .placeholder(placeholder)
+                        .isCenterCrop(true)
                         .errorPic(error)
                         .imageView(this)
                         .build())

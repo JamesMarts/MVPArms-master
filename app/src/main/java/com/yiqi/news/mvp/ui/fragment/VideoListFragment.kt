@@ -73,7 +73,8 @@ class VideoListFragment : BaseLazyLoadFragment<VideoListPresenter>(), VideoListC
     }
 
     override fun showVideoData(string: List<String>) {
-        mAdapter.setNewData(string)
+
+//        mAdapter.setNewData(string)
     }
 
     override fun initEvent() {

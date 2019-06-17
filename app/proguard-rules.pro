@@ -17,3 +17,11 @@
 #}
 
 # 混淆规则在 arms moudule 下的 proguard-rules.pro 中, 混淆前先参阅 https://github.com/JessYanCoding/MVPArms/wiki#1.5
+-keep public class cn.jzvd.JZMediaSystem {*; }
+-keep public class cn.jzvd.demo.CustomMedia.CustomMedia {*; }
+-keep public class cn.jzvd.demo.CustomMedia.JZMediaIjk {*; }
+-keep public class cn.jzvd.demo.CustomMedia.JZMediaSystemAssertFolder {*; }
+
+-keep class tv.danmaku.ijk.media.player.** {*; }
+-dontwarn tv.danmaku.ijk.media.player.*
+-keep interface tv.danmaku.ijk.media.player.** { *; }

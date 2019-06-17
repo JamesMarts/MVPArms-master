@@ -18,6 +18,7 @@ import com.yiqi.news.mvp.presenter.UserPresenter
 
 import com.yiqi.news.R
 import com.yiqi.news.app.widget.qmui.QMUITipDialog
+import com.yiqi.news.mvp.ui.activity.LoginActivity
 import com.yiqi.news.mvp.ui.activity.WithdrawActivity
 import kotlinx.android.synthetic.main.fragment_user.*
 
@@ -73,11 +74,12 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
 
     }
 
-    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw)
+    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw, R.id.btn_user_info)
     fun onClick(view: View) {
         when (view.id) {
             R.id.tv_user_invited_code -> mQMUIInfoDialog.show()
             R.id.btn_user_withdraw -> ArmsUtils.startActivity(WithdrawActivity::class.java )
+            R.id.btn_user_info -> ArmsUtils.startActivity(LoginActivity::class.java )
         }
     }
 

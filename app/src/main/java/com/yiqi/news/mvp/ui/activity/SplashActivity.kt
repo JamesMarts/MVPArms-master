@@ -117,5 +117,9 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View {
         return true
     }
 
+    override fun initImmersionBar() {
+        super.initImmersionBar()
+        mImmersionBar.fullScreen(true).navigationBarColor(R.color.colorWhite).init()
+    }
 
 }

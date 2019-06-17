@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/tool_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="20dp"
+            android:text="推荐码 "
+            android:textColor="@color/color_414141"
+            android:textSize="32sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <com.yiqi.news.app.widget.SeparatedEditText
+        android:id="@+id/edt_login_code"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginRight="33dp"
+        android:inputType="number"
+        android:textSize="24sp"
+        app:blockSpacing="10dp"
+        app:borderColor="@color/lightGrey"
+        app:separateType="@integer/type_underline"
+        app:textColor="@color/color_A22217" />
+
+    <TextView
+        android:id="@+id/btn_login_code_enter"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bg_edittext_line"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="进入"
+        android:textColor="@color/colorWhite"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/btn_code_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="178dp"
+        android:drawableLeft="@mipmap/ic_sign_reture_nor"
+        android:drawablePadding="2dp"
+        android:gravity="center_vertical"
+        android:text="返回登录"
+        android:textColor="@color/color_A22217"
+        android:textSize="12sp" />
+
+</LinearLayout>

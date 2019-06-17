@@ -215,7 +215,7 @@ dependencies {
     implementation files('lib/open_sdk_r6019_lite.jar')
 
     //视频播放器
-    implementation rootProject.ext.dependencies["gsyVideoPlayer"]
+    implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
 
     //是否需要ExoPlayer模式
     implementation rootProject.ext.dependencies["GSYVideoPlayer-exo2"]
@@ -225,4 +225,8 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
 
     implementation files('lib/alipaySdk-20180403.jar')
+
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+
+    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
 }

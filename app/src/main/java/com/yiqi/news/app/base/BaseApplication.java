@@ -36,7 +36,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.shuyu.gsyvideoplayer.player.PlayerFactory;
 import com.tencent.bugly.Bugly;
 
 import tv.danmaku.ijk.media.exo2.Exo2PlayerManager;
@@ -88,7 +87,6 @@ public class BaseApplication extends MultiDexApplication implements App {
         initBugly();
         initSmartRefresh();
         initDetectFileUriExposure();
-        initGsyExo();
     }
 
     public static Context getContext() {
@@ -100,10 +98,7 @@ public class BaseApplication extends MultiDexApplication implements App {
         Bugly.init(getApplicationContext(), "af6608915e", false);
     }
 
-    //初始化GSY
-    private void initGsyExo() {
-        PlayerFactory.setPlayManager(Exo2PlayerManager.class);//EXO模式
-    }
+
 
     //解决android7.0以上拍照崩溃问题
     private void initDetectFileUriExposure() {

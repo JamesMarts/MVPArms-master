@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tool_login"
+        android:id="@+id/tool_bind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
@@ -24,12 +25,12 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:text="登录"
+                android:text="绑定手机号"
                 android:textColor="@color/color_414141"
                 android:textSize="32sp" />
 
             <ImageView
-                android:id="@+id/btn_login_close"
+               android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -48,12 +49,6 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手机号"
-            android:textColor="@color/color_979797"
-            android:textSize="12sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,7 +56,7 @@
             android:paddingBottom="5dp">
 
             <EditText
-                android:id="@+id/edt_login_phone"
+                android:id="@+id/edt_bind_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
@@ -74,7 +69,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/btn_login_code"
+                android:id="@+id/btn_bind_code"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -86,7 +81,7 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/view_login_phone"
+            android:id="@+id/view_bind_phone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/color_CCCCCC" />
@@ -110,13 +105,7 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="验证码"
 
-            android:textColor="@color/color_979797"
-            android:textSize="12sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -124,7 +113,7 @@
             android:paddingBottom="5dp">
 
             <EditText
-                android:id="@+id/edt_login_code"
+                android:id="@+id/edt_bind_code"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
@@ -139,13 +128,12 @@
         </RelativeLayout>
 
         <View
-            android:id="@+id/view_login_code"
+            android:id="@+id/view_bind_code"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/color_CCCCCC" />
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -157,94 +145,29 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_bind"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="75dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/bg_edittext_line"
         android:enabled="false"
         android:gravity="center"
-        android:text="登录/注册"
+        android:text="进入"
         android:textColor="@color/colorWhite"
         android:textSize="17sp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/btn_bind_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:drawableLeft="@mipmap/ic_sign_reture_nor"
+        android:drawablePadding="2dp"
+        android:gravity="center_vertical"
+        android:text="返回登录"
+        android:textColor="@color/color_A22217"
+        android:textSize="12sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="72dp"
-                android:gravity="center_horizontal"
-                android:text="其他登录方式"
-                android:textColor="@color/color_979797"
-                android:textSize="12sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                android:paddingLeft="70dp"
-                android:paddingRight="70dp"
-                android:paddingBottom="48dp">
-
-                <ImageView
-                    android:id="@+id/btn_login_wechat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_sign_wechat_nor" />
-
-                <ImageView
-                    android:id="@+id/btn_login_weibo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@mipmap/ic_sign_weibo_nor" />
-
-                <ImageView
-                    android:id="@+id/btn_login_qq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/ic_sign_qq_nor" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="登录/注册即代表同意"
-                    android:textColor="#ff979797"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="《用户协议》"
-                    android:textColor="@color/color_A22217"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </RelativeLayout>
 </LinearLayout>

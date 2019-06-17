@@ -129,8 +129,9 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     protected void initImmersionBar() {
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false)
+                .statusBarDarkFont(true)
                 .init();
-        mImmersionBar.navigationBarColorTransform(R.color.defaultTextColor).init();
+        mImmersionBar.navigationBarColor(R.color.defaultTextColor).init();
     }
 
 
@@ -140,7 +141,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
      * @return
      */
     protected Boolean useImmersionBar() {
-        return false;
+        return true;
     }
 
     /**

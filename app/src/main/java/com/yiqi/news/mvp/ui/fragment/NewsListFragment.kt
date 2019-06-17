@@ -68,7 +68,7 @@ import javax.xml.datatype.DatatypeConstants.SECONDS
  * }
  * }
  */
-class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListContract.View, OnRefreshListener,  BaseQuickAdapter.OnItemClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListContract.View, OnRefreshListener, BaseQuickAdapter.OnItemClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
     override fun onRefresh(refreshLayout: RefreshLayout) {
 
     }
@@ -80,17 +80,17 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
 
     @SuppressLint("CheckResult")
     override fun onBGARefreshLayoutBeginRefreshing(refreshLayout: BGARefreshLayout?) {
-
-        Observable
-                .timer(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())//切换到主线程修改UI
-                .subscribe {
-                    refresh_layout.endRefreshing()
-                    tip_view.show("聚财赚推荐引擎有12条更新")
-                }
+//
+//        Observable
+//                .timer(1, TimeUnit.SECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())//切换到主线程修改UI
+//                .subscribe {
+//                    refresh_layout.endRefreshing()
+//                    tip_view.show("聚财赚推荐引擎有12条更新")
+//                }
+        mChannelCode?.let { mPresenter?.getNewsData(it) }
 
     }
-
 
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
@@ -99,7 +99,10 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
 
 
     override fun showNewsData(string: List<News>) {
-        mAdapter.setNewData(string)
+        refresh_layout.endRefreshing()
+        tip_view.show("聚财赚推荐引擎有12条更新")
+        if (isVideoList) mVideoAdapter.setNewData(string) else mAdapter.setNewData(string)
+
     }
 
     override fun lazyFetchData() {
@@ -110,8 +113,9 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
 
 
     }
+
     override fun initView() {
-        initAdapter()
+
         initRefreshLayout()
     }
 
@@ -122,6 +126,7 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
     private var isVideoList: Boolean = false
     private var mChannelCode: String? = null
     private lateinit var mAdapter: NewsAdapter
+    private lateinit var mVideoAdapter: VideoAdapter
 
     companion object {
         fun newInstance(): NewsListFragment {
@@ -148,7 +153,7 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
 
         mChannelCode = arguments?.getString(Constant.CHANNEL_CODE)
         isVideoList = arguments?.getBoolean(Constant.IS_VIDEO_LIST) ?: false
-
+        initAdapter(isVideoList)
         mChannelCode?.let { mPresenter?.getNewsData(it) }
 
     }
@@ -193,14 +198,21 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
         refresh_layout.shouldHandleRecyclerViewLoadingMore(rv_news)
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(isVideoList: Boolean) {
 
         rv_news.layoutManager = LinearLayoutManager(activity)
-        rv_news.addItemDecoration(DividerItemDecoration(DividerItemDecoration.VERTICAL).setHeight(dp2px(4)))
-        mAdapter = NewsAdapter()
-        mAdapter.bindToRecyclerView(rv_news)
-        mAdapter.setNewData(null)
-        mAdapter.onItemClickListener = this
+
+        if (isVideoList) {
+            mVideoAdapter = VideoAdapter()
+            mVideoAdapter.bindToRecyclerView(rv_news)
+            mVideoAdapter.onItemClickListener = this
+        } else {
+            rv_news.addItemDecoration(DividerItemDecoration(DividerItemDecoration.VERTICAL).setHeight(dp2px(4)))
+            mAdapter = NewsAdapter()
+            mAdapter.bindToRecyclerView(rv_news)
+            mAdapter.onItemClickListener = this
+        }
+
 
     }
 }

@@ -67,6 +67,7 @@ constructor(model: NewsContract.Model, rootView: NewsContract.View) :
             val newsFragment = NewsListFragment.newInstance()
             val bundle = Bundle()
             bundle.putString(Constant.CHANNEL_CODE, channel.channelCode)
+            bundle.putBoolean(Constant.IS_VIDEO_LIST, channel.channelCode.equals(channelCodes[1]))//是否是视频列表页面,根据判断频道号是否是视频
             newsFragment.setArguments(bundle)
             mFragments.add(newsFragment)//添加到集合中
         }

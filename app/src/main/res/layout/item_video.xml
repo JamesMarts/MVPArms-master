@@ -11,13 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="186dp">
 
-        <ImageView
-            android:id="@+id/iv_video_bg"
+        <com.yiqi.news.app.video.MyJZVideoPlayerStandard
+            android:id="@+id/videoPlayer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            />
 
         <com.flyco.roundview.RoundTextView
+            android:id="@+id/tv_video_long"
             android:layout_width="46dp"
             android:layout_height="21dp"
             android:layout_alignParentRight="true"
@@ -35,6 +36,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_video_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -60,6 +62,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_video_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
@@ -68,6 +71,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_video_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"

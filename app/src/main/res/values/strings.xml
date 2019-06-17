@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">聚财赚</string>
-    <string name="dialog_copy_code_success">复制邀请码成功！</string>
+    <string name="dialog_copy_code_success">复制邀请码成功</string>
+    <string name="dialog_code_send_success">验证码发送成功</string>
     <string name="net_unavailable">网络不可用</string>
 
     <string name="no_news_now">目前没有最新新闻了</string>
@@ -8,4 +9,5 @@
     <string name="refresh_pull_down_text">下拉推荐</string>
     <string name="refresh_release_text">松开推荐</string>
     <string name="refresh_ing_text">推荐中</string>
+    <string name="video_play_count">%s浏览</string>
 </resources>

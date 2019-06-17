@@ -2,10 +2,16 @@ package com.yiqi.news.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import butterknife.OnClick
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
+import com.yiqi.huize.mvp.dialog.OpenPageDialog
+import com.yiqi.news.Constant
 
 import com.yiqi.news.di.component.DaggerLoginComponent
 import com.yiqi.news.di.module.LoginModule
@@ -13,6 +19,8 @@ import com.yiqi.news.mvp.contract.LoginContract
 import com.yiqi.news.mvp.presenter.LoginPresenter
 
 import com.yiqi.news.R
+import com.yiqi.news.app.widget.qmui.QMUITipDialog
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 /**
@@ -40,7 +48,10 @@ import com.yiqi.news.R
  * }
  * }
  */
-class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
+class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, View.OnFocusChangeListener, TextWatcher, OpenPageDialog.OnClickListener {
+    override fun onOpen() {
+        ArmsUtils.startActivity(BindMobileActivity::class.java)
+    }
 
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerLoginComponent //如找不到该类,请编译一下项目
@@ -58,16 +69,31 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
+        edt_login_phone.onFocusChangeListener = this
+        edt_login_code.onFocusChangeListener = this
 
+        edt_login_phone.addTextChangedListener(this)
+        edt_login_code.addTextChangedListener(this)
+    }
+
+    override fun onFocusChange(view: View?, hasFocus: Boolean) {
+        when (view?.id) {
+            R.id.edt_login_phone -> if (hasFocus) view_login_phone.setBackgroundColor(ArmsUtils.getColor(this, R.color.color_A22217)) else view_login_phone.setBackgroundColor(ArmsUtils.getColor(this, R.color.color_CCCCCC))
+            R.id.edt_login_code -> if (hasFocus) view_login_code.setBackgroundColor(ArmsUtils.getColor(this, R.color.color_A22217)) else view_login_code.setBackgroundColor(ArmsUtils.getColor(this, R.color.color_CCCCCC))
+        }
     }
 
 
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
-
+    @OnClick(R.id.btn_login_code, R.id.btn_login, R.id.btn_login_wechat, R.id.btn_login_weibo, R.id.btn_login_qq, R.id.btn_login_close)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.btn_login_code -> mQMUIInfoDialog.show()
+            R.id.btn_login -> ArmsUtils.startActivity(CodeActivity::class.java)
+            R.id.btn_login_wechat -> openPage(Constant.WE_CHAT)
+            R.id.btn_login_weibo -> openPage(Constant.WEIBO)
+            R.id.btn_login_qq -> openPage(Constant.QQ)
+            R.id.btn_login_close -> killMyself()
+        }
     }
 
     override fun showMessage(message: String) {
@@ -81,4 +107,54 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
     override fun killMyself() {
         finish()
     }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+        if (edt_login_phone.text.isNotEmpty() && edt_login_code.text.isNotEmpty()) btn_login.isEnabled = true else false
+    }
+
+
+    override fun initImmersionBar() {
+        super.initImmersionBar()
+        mImmersionBar.titleBar(R.id.tool_login).init()
+    }
+
+    private var mLoginType: Int = 0
+    private val mQMUIInfoDialog: QMUITipDialog by lazy {
+        return@lazy QMUITipDialog.Builder(this)
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
+                .setTipWord(getString(R.string.dialog_code_send_success))
+                .create()
+    }
+    private val mOpenPageDialog by lazy {
+        return@lazy OpenPageDialog(this)
+    }
+
+
+    private fun openPage(type: Int) {
+        mLoginType = type
+        when (type) {
+
+            Constant.WE_CHAT -> {
+                mOpenPageDialog.setDesc("\"NewsApp\"想要打开微信")
+            }
+            Constant.WEIBO -> {
+                mOpenPageDialog.setDesc("\"NewsApp\"想要打开微博")
+            }
+            Constant.QQ -> {
+                mOpenPageDialog.setDesc("\"NewsApp\"想要打开QQ")
+            }
+        }
+        mOpenPageDialog.show()
+        mOpenPageDialog.setOnClickListener(this)
+    }
+
+
 }
