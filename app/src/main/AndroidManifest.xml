@@ -20,7 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mvp.ui.activity.BindMobileActivity"></activity>
+        <activity android:name=".mvp.ui.activity.RecordActivity"></activity>
+        <activity android:name=".mvp.ui.activity.BankcardActivity" />
+        <activity android:name=".mvp.ui.activity.ExchangeActivity" />
+        <activity android:name=".mvp.ui.activity.BindMobileActivity" />
         <activity android:name=".mvp.ui.activity.CodeActivity" />
         <activity android:name=".mvp.ui.activity.WithdrawActivity" />
         <activity android:name=".mvp.ui.activity.SplashActivity">

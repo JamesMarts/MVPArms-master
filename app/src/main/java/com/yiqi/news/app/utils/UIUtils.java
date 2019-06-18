@@ -31,6 +31,22 @@ public class UIUtils {
         mToast.show();
     }
 
+    /**
+     * 用于在线程中执行弹土司操作
+     */
+    public static void showToastSafely(final String msg) {
+        UIUtils.getMainThreadHandler().post(new Runnable() {
+
+            @Override
+            public void run() {
+                if (mToast == null) {
+                    mToast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
+                }
+                mToast.setText(msg);
+                mToast.show();
+            }
+        });
+    }
 
 
     /**
@@ -99,8 +115,56 @@ public class UIUtils {
         return getContext().getPackageName();
     }
 
+    /**
+     * 得到主线程Handler
+     *
+     * @return
+     */
+    public static Handler getMainThreadHandler() {
+        return BaseApplication.getMainHandler();
+    }
 
+    /**
+     * 得到主线程id
+     *
+     * @return
+     */
+    public static long getMainThreadId() {
+        return BaseApplication.getMainThreadId();
+    }
 
+    /**
+     * 安全的执行一个任务
+     *
+     * @param task
+     */
+    public static void postTaskSafely(Runnable task) {
+        int curThreadId = android.os.Process.myTid();
+        // 如果当前线程是主线程
+        if (curThreadId == getMainThreadId()) {
+            task.run();
+        } else {
+            // 如果当前线程不是主线程
+            getMainThreadHandler().post(task);
+        }
+    }
+
+    /**
+     * 延迟执行任务
+     *
+     * @param task
+     * @param delayMillis
+     */
+    public static void postTaskDelay(Runnable task, int delayMillis) {
+        getMainThreadHandler().postDelayed(task, delayMillis);
+    }
+
+    /**
+     * 移除任务
+     */
+    public static void removeTask(Runnable task) {
+        getMainThreadHandler().removeCallbacks(task);
+    }
 
     /**
      * dip-->px

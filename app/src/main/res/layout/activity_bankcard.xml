@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f8"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:hint="请输入持卡人姓名"
+        android:maxLength="15"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_414141"
+        android:textColorHint="@color/color_979797"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:hint="请输入身份证号"
+        android:maxLength="18"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_414141"
+        android:textColorHint="@color/color_979797"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:hint="请输入开户银行"
+        android:maxLength="15"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_414141"
+        android:textColorHint="@color/color_979797"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:hint="请输入银行卡号"
+        android:maxLength="18"
+        android:paddingLeft="15dp"
+        android:inputType="number"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_414141"
+        android:textColorHint="@color/color_979797"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:text="请确保姓名、身份证、银行卡开户人为同一人"
+        android:textColor="@color/color_979797"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/btn_withdraw_exchange"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bg_edittext_line"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="立即提现"
+        android:textColor="@color/colorWhite"
+        android:textSize="17sp" />
+</LinearLayout>

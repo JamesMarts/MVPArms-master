@@ -1,4 +1,4 @@
-package com.yiqi.news.mvp.adapter
+package com.yiqi.news.mvp.ui.adapter
 
 import android.support.transition.Visibility
 import android.view.View

@@ -1,6 +1,5 @@
 package com.yiqi.news.mvp.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -22,10 +21,9 @@ import com.yiqi.news.mvp.contract.VideoListContract
 import com.yiqi.news.mvp.presenter.VideoListPresenter
 
 import com.yiqi.news.R
-import com.yiqi.news.mvp.adapter.VideoAdapter
+import com.yiqi.news.mvp.ui.adapter.VideoAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import kotlinx.android.synthetic.main.fragment_video_list.*
 import java.util.concurrent.TimeUnit

@@ -3,67 +3,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:ignore="MergeRootFrame">
 
     <LinearLayout
+        android:id="@+id/tool_withdraw"
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_user_withdraw"
-        android:layout_height="188dp">
+        android:orientation="vertical"
+        android:paddingBottom="6dp">
+
         <ImageView
             android:layout_width="wrap_content"
-            android:paddingTop="32dp"
-            android:paddingLeft="16dp"
-            android:src="@mipmap/ic_common_toolbar_back"
             android:layout_height="wrap_content"
-            />
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            android:src="@mipmap/ic_common_toolbar_back" />
+
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="当前金币数"
                 android:textColor="@color/colorWhite"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7676"
                 android:layout_marginTop="14dp"
+                android:text="7676"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <com.flyco.roundview.RoundTextView
+                android:id="@+id/btn_user_withdraw"
                 android:layout_width="120dp"
-                app:rv_backgroundColor="@color/colorWhite"
-                app:rv_cornerRadius="14dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="21dp"
+                android:gravity="center"
                 android:text="立即提现"
                 android:textColor="@color/color_f04d22"
                 android:textSize="15sp"
-                android:gravity="center"
-                android:layout_marginTop="21dp"
-                android:layout_height="28dp" />
+                app:rv_backgroundColor="@color/colorWhite"
+                app:rv_cornerRadius="14dp" />
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="4dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="15dp"
                 android:gravity="end"
                 android:text="1000金币 = 1元"
                 android:textColor="@color/colorWhite"
-                android:textSize="10sp"
-                />
+                android:textSize="10sp" />
         </LinearLayout>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="14dp"
+        android:paddingBottom="24dp">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日金币"
+                android:textColor="@color/color_979797"
+                android:textSize="12sp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:hint="--"
+                android:textColor="@color/color_414141"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计获得金币"
+                android:textColor="@color/color_979797"
+                android:textSize="12sp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:hint="--"
+                android:textColor="@color/color_414141"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_f8f8f8"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="金币记录"
+        android:textColor="@color/color_979797"
+        android:textSize="12sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_coins_record"
+        tools:listitem="@layout/item_coins_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

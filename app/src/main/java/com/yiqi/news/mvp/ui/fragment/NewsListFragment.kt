@@ -3,9 +3,6 @@ package com.yiqi.news.mvp.ui.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +11,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chaychan.uikit.refreshlayout.BGANormalRefreshViewHolder
 import com.chaychan.uikit.refreshlayout.BGARefreshLayout
 
-import com.jess.arms.base.BaseFragment
 import com.jess.arms.base.BaseLazyLoadFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
@@ -31,16 +27,9 @@ import com.yiqi.news.mvp.presenter.NewsListPresenter
 
 import com.yiqi.news.R
 import com.yiqi.news.entity.News
-import com.yiqi.news.mvp.adapter.NewsAdapter
-import com.yiqi.news.mvp.adapter.VideoAdapter
-import com.yiqi.news.mvp.ui.activity.MainActivity
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.yiqi.news.mvp.ui.adapter.NewsAdapter
+import com.yiqi.news.mvp.ui.adapter.VideoAdapter
 import kotlinx.android.synthetic.main.fragment_news_list.*
-import kotlinx.android.synthetic.main.fragment_video_list.*
-
-import java.util.concurrent.TimeUnit
-import javax.xml.datatype.DatatypeConstants.SECONDS
 
 
 /**

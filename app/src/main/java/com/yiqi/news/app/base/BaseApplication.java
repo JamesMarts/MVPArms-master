@@ -17,6 +17,8 @@ package com.yiqi.news.app.base;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.multidex.MultiDexApplication;
@@ -60,6 +62,10 @@ public class BaseApplication extends MultiDexApplication implements App {
 
     //以下属性应用于整个应用程序，合理利用资源，减少资源浪费
     private static Context mContext;//上下文
+    private static Thread mMainThread;//主线程
+    private static long mMainThreadId;//主线程id
+    private static Looper mMainLooper;//循环队列
+    private static Handler mHandler;//主线程Handler
 
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化
@@ -83,7 +89,12 @@ public class BaseApplication extends MultiDexApplication implements App {
             this.mAppDelegate.onCreate(this);
 
         //对全局属性赋值
+        //对全局属性赋值
         mContext = getApplicationContext();
+        mMainThread = Thread.currentThread();
+        mMainThreadId = android.os.Process.myTid();
+        mHandler = new Handler();
+
         initBugly();
         initSmartRefresh();
         initDetectFileUriExposure();
@@ -151,5 +162,38 @@ public class BaseApplication extends MultiDexApplication implements App {
         Preconditions.checkNotNull(mAppDelegate, "%s cannot be null", AppDelegate.class.getName());
         Preconditions.checkState(mAppDelegate instanceof App, "%s must be implements %s", mAppDelegate.getClass().getName(), App.class.getName());
         return ((App) mAppDelegate).getAppComponent();
+    }
+
+
+    public static Thread getMainThread() {
+        return mMainThread;
+    }
+
+    public static void setMainThread(Thread mMainThread) {
+        BaseApplication.mMainThread = mMainThread;
+    }
+
+    public static long getMainThreadId() {
+        return mMainThreadId;
+    }
+
+    public static void setMainThreadId(long mMainThreadId) {
+        BaseApplication.mMainThreadId = mMainThreadId;
+    }
+
+    public static Looper getMainThreadLooper() {
+        return mMainLooper;
+    }
+
+    public static void setMainThreadLooper(Looper mMainLooper) {
+        BaseApplication.mMainLooper = mMainLooper;
+    }
+
+    public static Handler getMainHandler() {
+        return mHandler;
+    }
+
+    public static void setMainHandler(Handler mHandler) {
+        BaseApplication.mHandler = mHandler;
     }
 }

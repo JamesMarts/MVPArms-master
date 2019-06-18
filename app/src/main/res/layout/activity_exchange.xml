@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f8"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+    <TextView
+        android:id="@+id/btn_withdraw_bankcard"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="9dp"
+        android:drawableLeft="@mipmap/ic_mine_bankcard_nor"
+        android:background="@color/colorWhite"
+        android:paddingRight="21dp"
+        android:drawablePadding="12dp"
+        android:drawableRight="@mipmap/ic_user_list_enter"
+        android:text="选择银行卡"
+        android:textColor="@color/color_414141"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="15dp"
+        android:text="当前金币数 3434"
+        android:textColor="@color/color_414141"
+        android:textSize="15sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content"
+        android:text="1000金币=1元 满1000金币才可提现"
+        android:textColor="@color/color_979797"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/btn_withdraw_exchange"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="195dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bg_edittext_line"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="立即提现"
+        android:textColor="@color/colorWhite"
+        android:textSize="17sp" />
+</LinearLayout>
