@@ -1,4 +1,4 @@
-package com.chaychan.uikit;
+package com.jess.arms.widget;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.jess.arms.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +54,7 @@ public class LoadingFlashView extends FrameLayout {
         mLoad1 = ((ImageView) findViewById(R.id.load1));
         mLoad2 = ((ImageView) findViewById(R.id.load2));
         mLoad3 = ((ImageView) findViewById(R.id.load3));
-        mLoad4 = ((ImageView) findViewById(R.id.load4));
+        mLoad4 = ((ImageView) findViewById(R.id.load3));
         showLoading();
     }
 

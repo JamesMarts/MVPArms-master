@@ -1,16 +1,25 @@
 package com.yiqi.news.mvp.presenter
 
 import android.app.Application
+import com.google.gson.Gson
 
 import com.jess.arms.integration.AppManager
 import com.jess.arms.di.scope.ActivityScope
 import com.jess.arms.mvp.BasePresenter
 import com.jess.arms.http.imageloader.ImageLoader
 import com.yiqi.news.R
+import com.yiqi.news.app.utils.PreUtils
+import com.yiqi.news.app.utils.RxUtils
+import com.yiqi.news.entity.News
+import com.yiqi.news.entity.NewsResponse
 import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.yiqi.news.mvp.contract.VideoListContract
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
+import java.util.ArrayList
 
 
 /**
@@ -30,6 +39,8 @@ class VideoListPresenter
 @Inject
 constructor(model: VideoListContract.Model, rootView: VideoListContract.View) :
         BasePresenter<VideoListContract.Model, VideoListContract.View>(model, rootView) {
+
+    private var lastTime: Long = 0
     @Inject
     lateinit var mErrorHandler: RxErrorHandler
     @Inject
@@ -43,8 +54,32 @@ constructor(model: VideoListContract.Model, rootView: VideoListContract.View) :
     override fun onDestroy() {
         super.onDestroy()
     }
-    fun getTabData() {
-        val titles = mApplication.resources.getStringArray(R.array.channel)
-        mRootView.showVideoData(titles.toList())
+
+    fun getNewsData(channelCode: String) {
+        mModel.getNewsList(channelCode)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxUtils.applySchedulers(mRootView))
+                .subscribe(object : ErrorHandleSubscriber<NewsResponse>(mErrorHandler) {
+                    override fun onNext(t: NewsResponse) {
+                        lastTime = System.currentTimeMillis() / 1000
+                        PreUtils.putLong(channelCode, lastTime)//保存刷新的时间戳
+
+                        val data = t.data
+                        val newsList = ArrayList<News>()
+                        if (!data.isEmpty()) {
+                            for (newsData in data) {
+                                val news = Gson().fromJson(newsData.content, News::class.java)
+                                newsList.add(news)
+                            }
+                        }
+                        if (newsList.isNotEmpty())
+                            mRootView.showNewsData(newsList, t.tips.display_info)
+                        else
+                            mRootView.showEmpty()
+
+
+                    }
+                })
     }
 }

@@ -85,7 +85,6 @@ class ExchangeActivity : BaseActivity<ExchangePresenter>(), ExchangeContract.Vie
     override fun initData(savedInstanceState: Bundle?) {
         toolbar.toolbar_title.text = "提现兑换"
         toolbar.toolbar_menu.text = "规则说明"
-        toolbar.toolbar_back.setOnClickListener(this)
         toolbar.toolbar_menu.setOnClickListener(this)
         initBottomSheetDialog()
 
@@ -127,7 +126,6 @@ class ExchangeActivity : BaseActivity<ExchangePresenter>(), ExchangeContract.Vie
     @OnClick(R.id.toolbar_back, R.id.btn_withdraw_bankcard)
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.toolbar_back -> killMyself()
             R.id.btn_withdraw_bankcard -> {
                 mPresenter?.doGetBanklist()
             }

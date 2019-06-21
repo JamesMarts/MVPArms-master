@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chaychan.uikit.refreshlayout.BGANormalRefreshViewHolder
 import com.chaychan.uikit.refreshlayout.BGARefreshLayout
+import com.jess.arms.base.BaseFragment
 
 import com.jess.arms.base.BaseLazyLoadFragment
 import com.jess.arms.di.component.AppComponent
@@ -27,6 +28,8 @@ import com.yiqi.news.mvp.presenter.NewsListPresenter
 
 import com.yiqi.news.R
 import com.yiqi.news.entity.News
+import com.yiqi.news.mvp.ui.activity.NewsDetailActivity
+import com.yiqi.news.mvp.ui.activity.VideoDetailActivity
 import com.yiqi.news.mvp.ui.adapter.NewsAdapter
 import com.yiqi.news.mvp.ui.adapter.VideoAdapter
 import kotlinx.android.synthetic.main.fragment_news_list.*
@@ -57,7 +60,28 @@ import kotlinx.android.synthetic.main.fragment_news_list.*
  * }
  * }
  */
-class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListContract.View, OnRefreshListener, BaseQuickAdapter.OnItemClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.View, OnRefreshListener, BaseQuickAdapter.OnItemClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+    override fun showEmpty() {
+        mStateView.showEmpty()
+    }
+
+
+    private val mAdapter: NewsAdapter by lazy {
+        return@lazy NewsAdapter()
+    }
+    private val mVideoAdapter: VideoAdapter by lazy {
+        return@lazy VideoAdapter()
+    }
+
+    private val mChannelCode: String by lazy {
+        return@lazy arguments!!.getString(Constant.CHANNEL_CODE)
+    }
+
+    private val isVideoList: Boolean by lazy {
+        return@lazy arguments!!.getBoolean(Constant.IS_VIDEO_LIST)
+    }
+
+
     override fun onRefresh(refreshLayout: RefreshLayout) {
 
     }
@@ -69,53 +93,38 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
 
     @SuppressLint("CheckResult")
     override fun onBGARefreshLayoutBeginRefreshing(refreshLayout: BGARefreshLayout?) {
-//
-//        Observable
-//                .timer(1, TimeUnit.SECONDS)
-//                .observeOn(AndroidSchedulers.mainThread())//切换到主线程修改UI
-//                .subscribe {
-//                    refresh_layout.endRefreshing()
-//                    tip_view.show("聚财赚推荐引擎有12条更新")
-//                }
         mChannelCode?.let { mPresenter?.getNewsData(it) }
 
     }
 
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-
+        if (isVideoList) ArmsUtils.startActivity(VideoDetailActivity::class.java) else ArmsUtils.startActivity(NewsDetailActivity::class.java)
     }
 
 
-    override fun showNewsData(string: List<News>) {
+    override fun showNewsData(string: List<News>, tips: String) {
         refresh_layout.endRefreshing()
-        tip_view.show("聚财赚推荐引擎有12条更新")
+        tip_view.show(tips.replace("今日头条","聚财赚"))
+        mStateView.showContent()
         if (isVideoList) mVideoAdapter.setNewData(string) else mAdapter.setNewData(string)
 
     }
 
     override fun lazyFetchData() {
 
+        mChannelCode?.let { mPresenter?.getNewsData(it) }
     }
 
-    override fun lazyLoadData() {
-
-
-    }
 
     override fun initView() {
-
         initRefreshLayout()
     }
 
     override fun initEvent() {
-
+        mStateView.showLoading()
     }
 
-    private var isVideoList: Boolean = false
-    private var mChannelCode: String? = null
-    private lateinit var mAdapter: NewsAdapter
-    private lateinit var mVideoAdapter: VideoAdapter
 
     companion object {
         fun newInstance(): NewsListFragment {
@@ -139,23 +148,12 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
-        mChannelCode = arguments?.getString(Constant.CHANNEL_CODE)
-        isVideoList = arguments?.getBoolean(Constant.IS_VIDEO_LIST) ?: false
         initAdapter(isVideoList)
-        mChannelCode?.let { mPresenter?.getNewsData(it) }
+
 
     }
 
     override fun setData(data: Any?) {
-
-    }
-
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
 
     }
 
@@ -170,6 +168,7 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
     override fun killMyself() {
 
     }
+
 
     fun initRefreshLayout() {
         refresh_layout.setDelegate(this)
@@ -188,20 +187,14 @@ class NewsListFragment : BaseLazyLoadFragment<NewsListPresenter>(), NewsListCont
     }
 
     private fun initAdapter(isVideoList: Boolean) {
-
         rv_news.layoutManager = LinearLayoutManager(activity)
-
         if (isVideoList) {
-            mVideoAdapter = VideoAdapter()
             mVideoAdapter.bindToRecyclerView(rv_news)
             mVideoAdapter.onItemClickListener = this
         } else {
             rv_news.addItemDecoration(DividerItemDecoration(DividerItemDecoration.VERTICAL).setHeight(dp2px(4)))
-            mAdapter = NewsAdapter()
             mAdapter.bindToRecyclerView(rv_news)
             mAdapter.onItemClickListener = this
         }
-
-
     }
 }

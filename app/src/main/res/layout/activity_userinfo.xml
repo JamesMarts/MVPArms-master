@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_f8f8f8"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <include layout="@layout/include_title" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:id="@+id/iv_userinfo_avatar"
+        android:layout_marginTop="24dp"
+        app:riv_corner_radius="60dp"
+        android:layout_marginBottom="18dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="昵称"
+            android:textColor="@color/color_414141"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_userinfo_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/ic_user_enter"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:hint="请选择"
+            android:text=""
+            android:textColor="@color/color_979797"
+            android:textColorHint="@color/color_979797"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="性别"
+            android:textColor="@color/color_414141"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_userinfo_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/ic_user_enter"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:hint="请选择"
+            android:text=""
+            android:textColor="@color/color_979797"
+            android:textColorHint="@color/color_979797"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="生日"
+            android:textColor="@color/color_414141"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_userinfo_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/ic_user_enter"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:hint="请选择"
+            android:text=""
+            android:textColor="@color/color_979797"
+            android:textColorHint="@color/color_979797"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="我的邀请码"
+            android:textColor="@color/color_414141"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_userinfo_invited"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/ic_mine_set_nor"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="000000"
+            android:text=""
+            android:textColor="@color/color_979797"
+            android:textColorHint="@color/color_979797"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+</LinearLayout>

@@ -62,6 +62,7 @@ constructor(model: NewsListContract.Model, rootView: NewsListContract.View) :
                 .compose(RxUtils.applySchedulers(mRootView))
                 .subscribe(object : ErrorHandleSubscriber<NewsResponse>(mErrorHandler){
                     override fun onNext(t: NewsResponse) {
+
                         lastTime = System.currentTimeMillis() / 1000
                         PreUtils.putLong(channelCode, lastTime)//保存刷新的时间戳
 
@@ -73,7 +74,10 @@ constructor(model: NewsListContract.Model, rootView: NewsListContract.View) :
                                 newsList.add(news)
                             }
                         }
-                        mRootView.showNewsData(newsList)
+                        if (newsList.isNotEmpty())
+                            mRootView.showNewsData(newsList, t.tips.display_info)
+                        else
+                            mRootView.showEmpty()
                     }
                 })
     }

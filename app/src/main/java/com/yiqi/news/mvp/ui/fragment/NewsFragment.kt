@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.OnClick
 
 import com.jess.arms.base.BaseFragment
+import com.jess.arms.base.BaseLazyLoadFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
 
@@ -18,6 +20,7 @@ import com.yiqi.news.mvp.contract.NewsContract
 import com.yiqi.news.mvp.presenter.NewsPresenter
 
 import com.yiqi.news.R
+import com.yiqi.news.mvp.ui.activity.SearchActivity
 import kotlinx.android.synthetic.main.fragment_news.*
 import java.util.ArrayList
 
@@ -94,13 +97,6 @@ class NewsFragment : BaseFragment<NewsPresenter>(), NewsContract.View {
 
     }
 
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
-
-    }
 
     override fun showMessage(message: String) {
         ArmsUtils.snackbarText(message)
@@ -122,4 +118,10 @@ class NewsFragment : BaseFragment<NewsPresenter>(), NewsContract.View {
 
     override fun useImmersionBar(): Boolean? = true
 
+    @OnClick(R.id.iv_news_search, R.id.iv_news_calender)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.iv_news_search -> ArmsUtils.startActivity(SearchActivity::class.java)
+        }
+    }
 }

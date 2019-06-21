@@ -2,10 +2,13 @@ package com.yiqi.news.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
+import com.jess.arms.widget.DividerItemDecoration
+import com.novel.cn.ext.dp2px
 
 import com.yiqi.news.di.component.DaggerRecordComponent
 import com.yiqi.news.di.module.RecordModule
@@ -13,6 +16,12 @@ import com.yiqi.news.mvp.contract.RecordContract
 import com.yiqi.news.mvp.presenter.RecordPresenter
 
 import com.yiqi.news.R
+import com.yiqi.news.mvp.ui.adapter.CoinsAdapter
+import com.yiqi.news.mvp.ui.adapter.WithdrawRecordAdapter
+import kotlinx.android.synthetic.main.activity_record.*
+import kotlinx.android.synthetic.main.activity_withdraw.*
+import kotlinx.android.synthetic.main.include_title.*
+import kotlinx.android.synthetic.main.include_title.view.*
 
 
 /**
@@ -51,16 +60,30 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordContract.View {
                 .inject(this)
     }
 
+    private lateinit var mAdapter: WithdrawRecordAdapter
 
     override fun initView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_record //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
 
-    override fun initData(savedInstanceState: Bundle?) {
 
+    override fun initData(savedInstanceState: Bundle?) {
+        toolbar.toolbar_title.text = "提现记录"
+        initAdapter()
     }
 
+    private fun initAdapter() {
+
+        rv_record.layoutManager = LinearLayoutManager(this)
+        rv_record.addItemDecoration(DividerItemDecoration(DividerItemDecoration.VERTICAL).setHeight(dp2px(4)))
+        mAdapter = WithdrawRecordAdapter()
+        mAdapter.bindToRecyclerView(rv_record)
+        val mList: List<String> = listOf("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+        mAdapter.setNewData(mList)
+
+
+    }
 
     override fun showLoading() {
 
@@ -80,5 +103,10 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordContract.View {
 
     override fun killMyself() {
         finish()
+    }
+
+    override fun initImmersionBar() {
+        super.initImmersionBar()
+        mImmersionBar.titleBar(R.id.toolbar).init()
     }
 }

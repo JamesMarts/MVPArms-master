@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chaychan.uikit.refreshlayout.BGANormalRefreshViewHolder
 import com.chaychan.uikit.refreshlayout.BGARefreshLayout
+import com.jess.arms.base.BaseFragment
 
 import com.jess.arms.base.BaseLazyLoadFragment
 import com.jess.arms.di.component.AppComponent
 import com.jess.arms.utils.ArmsUtils
+import com.jess.arms.widget.DividerItemDecoration
+import com.novel.cn.ext.dp2px
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
+import com.yiqi.news.Constant
 
 import com.yiqi.news.di.component.DaggerVideoListComponent
 import com.yiqi.news.di.module.VideoListModule
@@ -21,6 +25,8 @@ import com.yiqi.news.mvp.contract.VideoListContract
 import com.yiqi.news.mvp.presenter.VideoListPresenter
 
 import com.yiqi.news.R
+import com.yiqi.news.entity.News
+import com.yiqi.news.mvp.ui.adapter.NewsAdapter
 import com.yiqi.news.mvp.ui.adapter.VideoAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -54,30 +60,34 @@ import java.util.concurrent.TimeUnit
  * }
  * }
  */
-class VideoListFragment : BaseLazyLoadFragment<VideoListPresenter>(), VideoListContract.View, OnRefreshListener,
+class VideoListFragment : BaseFragment<VideoListPresenter>(), VideoListContract.View,
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+    override fun showEmpty() {
+        mStateView.showEmpty()
+    }
+
+
+    private val mVideoAdapter: VideoAdapter by lazy {
+        return@lazy VideoAdapter()
+    }
+
+    private val mChannelCode: String by lazy {
+        return@lazy arguments!!.getString(Constant.CHANNEL_CODE)
+    }
+
+
     override fun onBGARefreshLayoutBeginRefreshing(refreshLayout: BGARefreshLayout?) {
-        Observable
-                .timer(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())//切换到主线程修改UI
-                .subscribe {
-                    refresh_layout_video.endRefreshing()
-                    tip_view_video.show("聚财赚推荐引擎有12条更新")
-                }
+        mChannelCode?.let { mPresenter?.getNewsData(it) }
     }
 
     override fun onBGARefreshLayoutBeginLoadingMore(refreshLayout: BGARefreshLayout?): Boolean {
-       return  false
-    }
-
-    override fun showVideoData(string: List<String>) {
-
-//        mAdapter.setNewData(string)
+        return false
     }
 
     override fun initEvent() {
-
+        mStateView.showLoading()
     }
+
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
 
     }
@@ -86,21 +96,13 @@ class VideoListFragment : BaseLazyLoadFragment<VideoListPresenter>(), VideoListC
 
     }
 
-    override fun onRefresh(refreshLayout: RefreshLayout) {
-
-    }
-
-    private lateinit var mAdapter: VideoAdapter
-
-
-
-    override fun lazyLoadData() {
-
-    }
 
     override fun lazyFetchData() {
 
+        mChannelCode?.let { mPresenter?.getNewsData(it) }
     }
+
+
 
     companion object {
         fun newInstance(): VideoListFragment {
@@ -125,13 +127,20 @@ class VideoListFragment : BaseLazyLoadFragment<VideoListPresenter>(), VideoListC
 
     override fun initData(savedInstanceState: Bundle?) {
         initAdapter()
-        mPresenter?.getTabData()
     }
+
 
     override fun setData(data: Any?) {
 
     }
 
+
+    override fun showNewsData(string: List<News>, tips: String) {
+        refresh_layout_video.endRefreshing()
+        tip_view_video.show(tips.replace("今日头条","聚财赚"))
+        mStateView.showContent()
+        mVideoAdapter.setNewData(string)
+    }
 
     override fun showMessage(message: String) {
         ArmsUtils.snackbarText(message)
@@ -141,23 +150,22 @@ class VideoListFragment : BaseLazyLoadFragment<VideoListPresenter>(), VideoListC
     override fun killMyself() {
 
     }
+
     override fun initView() {
-        initAdapter()
         initRefreshLayout()
     }
-    private fun initAdapter() {
-        rv_video.layoutManager = LinearLayoutManager(activity)
-        mAdapter = VideoAdapter()
-        mAdapter.bindToRecyclerView(rv_video)
-        mAdapter.setNewData(null)
-        mAdapter.setOnLoadMoreListener(this, rv_video)
-        mAdapter.onItemClickListener = this
 
+    private fun initAdapter() {
+        mVideoAdapter.bindToRecyclerView(rv_video)
+        mVideoAdapter.onItemClickListener = this
     }
+
     fun initRefreshLayout() {
         refresh_layout_video.setDelegate(this)
+
         // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
         val refreshViewHolder = BGANormalRefreshViewHolder(mContext, false)
+
         // 设置下拉刷新
         refreshViewHolder.setRefreshViewBackgroundColorRes(R.color.color_F3F5F4)//背景色
         refreshViewHolder.setPullDownRefreshText(getString(R.string.refresh_pull_down_text))//下拉的提示文字
@@ -167,6 +175,6 @@ class VideoListFragment : BaseLazyLoadFragment<VideoListPresenter>(), VideoListC
 
         // 设置下拉刷新和上拉加载更多的风格
         refresh_layout_video.setRefreshViewHolder(refreshViewHolder)
-        refresh_layout_video.shouldHandleRecyclerViewLoadingMore(rv_news)
+        refresh_layout_video.shouldHandleRecyclerViewLoadingMore(rv_video)
     }
 }

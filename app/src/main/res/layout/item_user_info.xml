@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView
+    android:id="@+id/tv_dialog_user"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:background="@color/colorWhite"
+    android:paddingLeft="15dp"
+    android:text="选择相册"
+    android:gravity="center_vertical"
+    android:textColor="@color/color_414141"
+    android:textSize="15sp"
+    tools:ignore="MissingDefaultResource" />

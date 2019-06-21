@@ -111,6 +111,7 @@ dependencies {
     api rootProject.ext.dependencies["barlibrary"]
 
     api 'com.github.GrenderG:Toasty:1.4.2'
+    api 'com.github.nukc.stateview:library:1.2.1'
 }
 
 apply from: '../bintray.gradle'

@@ -18,8 +18,7 @@ import com.yiqi.news.mvp.presenter.UserPresenter
 
 import com.yiqi.news.R
 import com.yiqi.news.app.widget.qmui.QMUITipDialog
-import com.yiqi.news.mvp.ui.activity.LoginActivity
-import com.yiqi.news.mvp.ui.activity.WithdrawActivity
+import com.yiqi.news.mvp.ui.activity.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
 
@@ -28,6 +27,7 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
     override fun initEvent() {
 
     }
+
     override fun lazyFetchData() {
 
     }
@@ -54,9 +54,11 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
                 .build()
                 .inject(this)
     }
+
     override fun initView() {
 
     }
+
     override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
@@ -74,12 +76,17 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
 
     }
 
-    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw, R.id.btn_user_info)
+    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw, R.id.btn_user_info, R.id.btn_user_record, R.id.btn_user_collection,R.id.btn_user_setting,R.id.btn_user_msg,R.id.iv_user_avatar)
     fun onClick(view: View) {
         when (view.id) {
+            R.id.iv_user_avatar -> ArmsUtils.startActivity(UserinfoActivity::class.java)
             R.id.tv_user_invited_code -> mQMUIInfoDialog.show()
-            R.id.btn_user_withdraw -> ArmsUtils.startActivity(WithdrawActivity::class.java )
-            R.id.btn_user_info -> ArmsUtils.startActivity(LoginActivity::class.java )
+            R.id.btn_user_withdraw -> ArmsUtils.startActivity(WithdrawActivity::class.java)
+            R.id.btn_user_info -> ArmsUtils.startActivity(LoginActivity::class.java)
+            R.id.btn_user_record -> ArmsUtils.startActivity(RecordActivity::class.java)
+            R.id.btn_user_collection -> ArmsUtils.startActivity(CollectionActivity::class.java)
+            R.id.btn_user_setting -> ArmsUtils.startActivity(SettingActivity::class.java)
+            R.id.btn_user_msg -> ArmsUtils.startActivity(MessageActivity::class.java)
         }
     }
 

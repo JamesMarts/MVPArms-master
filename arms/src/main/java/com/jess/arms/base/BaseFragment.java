@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nukc.stateview.StateView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.jess.arms.R;
 import com.jess.arms.base.delegate.IFragment;
@@ -61,9 +62,12 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     protected ImmersionBar mImmersionBar;
     private Boolean isViewPrepared = false; // 标识fragment视图已经初始化完毕
     protected Boolean hasFetchData = false; // 标识已经触发过懒加载数据
+
+    protected StateView mStateView;//用于显示加载中、网络异常，空布局、内容布局
     @Inject
     @Nullable
     protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null
+    private View rootView;
 
     @NonNull
     @Override
@@ -89,7 +93,20 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return initView(inflater, container, savedInstanceState);
+        rootView = initView(inflater, container, savedInstanceState);
+        mStateView = StateView.inject(getStateViewRoot());
+        if (mStateView != null) {
+            mStateView.setLoadingResource(R.layout.page_loading);
+            mStateView.setRetryResource(R.layout.page_net_error);
+        }
+        return rootView;
+    }
+
+    /**
+     * StateView的根布局，默认是整个界面，如果需要变换可以重写此方法
+     */
+    public View getStateViewRoot() {
+        return rootView;
     }
 
     @Override

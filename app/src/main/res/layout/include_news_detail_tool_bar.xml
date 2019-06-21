@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:id="@+id/rl_toolbar_news"
+    android:paddingTop="8dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="8dp"
+    tools:ignore="MissingDefaultResource">
+
+    <com.flyco.roundview.RoundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/ll_toolbar_news"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="21dp"
+        app:rv_backgroundColor="#f3f3f3"
+        app:rv_cornerRadius="17dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:hint="写下你要说的吧~"
+            android:paddingLeft="18dp"
+            android:textColor="@color/color_979797"
+            android:textColorHint="@color/color_979797"
+            android:textSize="12sp" />
+    </com.flyco.roundview.RoundLinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_toolbar_news"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_toolbar_news_like" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_toolbar_news_share" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_toolbar_news_collection" />
+
+    </LinearLayout>
+</RelativeLayout>

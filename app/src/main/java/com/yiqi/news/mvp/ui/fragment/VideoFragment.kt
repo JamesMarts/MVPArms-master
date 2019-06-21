@@ -57,13 +57,9 @@ class VideoFragment : BaseFragment<VideoPresenter>(), VideoContract.View{
     override fun initEvent() {
 
     }
-    private val mFragments = ArrayList<Fragment>()
 
-    override fun getTabVideoData(tabs: Array<String>) {
-        for (i in tabs.indices) {
-            mFragments.add(VideoListFragment.newInstance())
-        }
-        tl_video.setFragmentViewPager(vp, tabs, this, mFragments)
+    override fun getTabVideoData(tabs: Array<String>,fragment: ArrayList<Fragment>) {
+        tl_video.setFragmentViewPager(vp, tabs, this, fragment)
     }
 
     override fun lazyFetchData() {
