@@ -49,6 +49,24 @@ import kotlinx.android.synthetic.main.activity_login.*
  * }
  */
 class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, View.OnFocusChangeListener, TextWatcher, OpenPageDialog.OnClickListener {
+
+
+    override fun showUnBind() {
+        var bundle = Bundle()
+        bundle.putString("mobile", edt_login_phone.text.toString())
+        bundle.putString("code", edt_login_code.text.toString())
+        ArmsUtils.startActivity(this, CodeActivity::class.java, bundle)
+        killMyself()
+    }
+
+    override fun showLoginSuccess() {
+        killMyself()
+    }
+
+    override fun showCodeSuccess() {
+        mQMUIInfoDialog.show()
+    }
+
     override fun onOpen() {
         ArmsUtils.startActivity(BindMobileActivity::class.java)
     }
@@ -87,8 +105,8 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, View.O
     @OnClick(R.id.btn_login_code, R.id.btn_login, R.id.btn_login_wechat, R.id.btn_login_weibo, R.id.btn_login_qq, R.id.btn_login_close)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.btn_login_code -> mQMUIInfoDialog.show()
-            R.id.btn_login -> ArmsUtils.startActivity(CodeActivity::class.java)
+            R.id.btn_login_code -> mPresenter?.sendCode(edt_login_phone.text.toString().trim())
+            R.id.btn_login -> mPresenter?.login(edt_login_phone.text.toString().trim(), edt_login_code.text.toString().trim())
             R.id.btn_login_wechat -> openPage(Constant.WE_CHAT)
             R.id.btn_login_weibo -> openPage(Constant.WEIBO)
             R.id.btn_login_qq -> openPage(Constant.QQ)

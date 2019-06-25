@@ -21,6 +21,22 @@ import kotlinx.android.synthetic.main.activity_code.*
 
 
 class CodeActivity : BaseActivity<CodePresenter>(), CodeContract.View, SeparatedEditText.TextChangedListener {
+    override fun showBindError(errMsg: String) {
+       showMessage(errMsg)
+    }
+
+    override fun showBindSuccess() {
+        finish()
+    }
+
+
+    private val mMobile: String by lazy {
+        return@lazy intent.getStringExtra("mobile")
+    }
+
+    private val mCode: String by lazy {
+        return@lazy intent.getStringExtra("code")
+    }
 
     override fun textChanged(changeText: CharSequence?) {
         btn_login_code_enter.isEnabled = changeText?.length == 6
@@ -67,10 +83,11 @@ class CodeActivity : BaseActivity<CodePresenter>(), CodeContract.View, Separated
         mImmersionBar.titleBar(R.id.tool_code).init()
     }
 
-    @OnClick(R.id.btn_code_back)
+    @OnClick(R.id.btn_code_back,R.id.btn_login_code_enter)
     fun onClick(view: View) {
         when (view.id) {
             R.id.btn_code_back -> killMyself()
+            R.id.btn_login_code_enter->mPresenter?.bind(mMobile,mCode,edt_login_code.text.toString())
 
         }
     }

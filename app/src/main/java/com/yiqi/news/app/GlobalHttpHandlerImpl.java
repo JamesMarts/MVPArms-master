@@ -24,7 +24,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jess.arms.http.GlobalHttpHandler;
 import com.jess.arms.http.log.RequestInterceptor;
 import com.jess.arms.utils.ArmsUtils;
-import com.yiqi.news.mvp.model.entity.User;
 
 import java.util.List;
 

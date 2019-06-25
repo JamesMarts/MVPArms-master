@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -323,9 +324,12 @@ public class ArmsUtils {
      *
      * @param
      */
-    public static void startActivity(Activity activity, Intent intent) {
-        activity.startActivity(intent);
+    public static void startActivity(Context context, Class clazz, Bundle params) {
+        Intent intent = new Intent(context, clazz);
+        intent.putExtras(params);
+        context.startActivity(intent);
     }
+
 
     /**
      * 获得屏幕的宽度

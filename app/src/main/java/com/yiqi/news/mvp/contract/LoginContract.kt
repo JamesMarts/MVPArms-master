@@ -2,6 +2,10 @@ package com.yiqi.news.mvp.contract
 
 import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
+import com.yiqi.news.entity.BaseResponse
+import com.yiqi.news.entity.NewsResponse
+import com.yiqi.news.entity.User
+import io.reactivex.Observable
 
 
 /**
@@ -18,9 +22,31 @@ import com.jess.arms.mvp.IModel
  */
 interface LoginContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
-    interface View : IView
+    interface View : IView {
+        /*
+          登录成功
+         */
+        fun showLoginSuccess()
+
+        /*
+          *   未绑定
+          */
+        fun showUnBind()
+
+        /*
+        * 获取验证码成功
+        * */
+        fun showCodeSuccess()
+
+
+    }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
-    interface Model : IModel
+    interface Model : IModel {
+
+        fun sendCode(phone: String): Observable<BaseResponse<User>>
+
+        fun login(phone: String, code: String): Observable<BaseResponse<User>>
+    }
 
 }

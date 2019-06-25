@@ -28,5 +28,5 @@ import com.yiqi.news.BuildConfig;
  */
 public interface Api {
     String APP_DOMAIN = BuildConfig.BASE_URL;
-    String RequestSuccess = "0";
+    int RequestSuccess = 0;
 }

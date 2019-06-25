@@ -24,7 +24,8 @@ import io.rx_cache2.EvictProvider;
 import io.rx_cache2.LifeCache;
 import io.rx_cache2.Reply;
 import io.rx_cache2.internal.RxCache;
-import com.yiqi.news.mvp.model.entity.User;
+
+import com.yiqi.news.entity.User;
 
 /**
  * ================================================

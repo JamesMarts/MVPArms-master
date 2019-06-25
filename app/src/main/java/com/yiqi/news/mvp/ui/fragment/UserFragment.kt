@@ -18,11 +18,15 @@ import com.yiqi.news.mvp.presenter.UserPresenter
 
 import com.yiqi.news.R
 import com.yiqi.news.app.widget.qmui.QMUITipDialog
+import com.yiqi.news.entity.User
 import com.yiqi.news.mvp.ui.activity.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
 
 class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
+    override fun showUser(user: User) {
+        showMessage("success")
+    }
 
     override fun initEvent() {
 
@@ -59,6 +63,11 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        mPresenter?.getUser()
+    }
+
     override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
@@ -76,7 +85,7 @@ class UserFragment : BaseFragment<UserPresenter>(), UserContract.View {
 
     }
 
-    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw, R.id.btn_user_info, R.id.btn_user_record, R.id.btn_user_collection,R.id.btn_user_setting,R.id.btn_user_msg,R.id.iv_user_avatar)
+    @OnClick(R.id.tv_user_invited_code, R.id.btn_user_withdraw, R.id.btn_user_info, R.id.btn_user_record, R.id.btn_user_collection, R.id.btn_user_setting, R.id.btn_user_msg, R.id.iv_user_avatar)
     fun onClick(view: View) {
         when (view.id) {
             R.id.iv_user_avatar -> ArmsUtils.startActivity(UserinfoActivity::class.java)

@@ -1,31 +1,8 @@
-/*
- * Copyright 2017 JessYan
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.yiqi.news.mvp.model.entity;
+package com.yiqi.news.entity;
 
-/**
- * ================================================
- * User 实体类
- * <p>
- * Created by JessYan on 04/09/2016 17:14
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * ================================================
- */
-public class User {
+import java.io.Serializable;
 
+public class User implements Serializable {
 
     /**
      * userId : 3
@@ -43,7 +20,7 @@ public class User {
      * userAppVersion : 1
      * createTime : 1560828816903
      * updateTime : 1560917117454
-     * token : 1780ca0427ce4aff9227f8fbc6cc7c03
+     * token : e7c03d37af5548389e011adc573db9ed
      */
 
     private int userId;

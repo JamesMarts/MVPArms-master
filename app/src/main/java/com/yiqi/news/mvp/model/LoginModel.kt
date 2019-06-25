@@ -6,9 +6,14 @@ import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
 
 import com.jess.arms.di.scope.ActivityScope
+import com.yiqi.news.entity.BaseResponse
+import com.yiqi.news.entity.User
 import javax.inject.Inject
 
 import com.yiqi.news.mvp.contract.LoginContract
+import com.yiqi.news.mvp.model.api.service.CommonService
+import com.yiqi.news.mvp.model.api.service.UserService
+import io.reactivex.Observable
 
 
 /**
@@ -27,12 +32,22 @@ import com.yiqi.news.mvp.contract.LoginContract
 class LoginModel
 @Inject
 constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager), LoginContract.Model {
+
+    override fun login(mobile: String, code: String): Observable<BaseResponse<User>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).login(mobile,code)
+    }
+
+    override fun sendCode(phone:String): Observable<BaseResponse<User>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).sendCode(phone)
+    }
+
+
     @Inject
-    lateinit var mGson: Gson;
+    lateinit var mGson: Gson
     @Inject
-    lateinit var mApplication: Application;
+    lateinit var mApplication: Application
 
     override fun onDestroy() {
-        super.onDestroy();
+        super.onDestroy()
     }
 }

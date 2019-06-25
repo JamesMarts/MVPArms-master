@@ -1,4 +1,4 @@
-package com.yiqi.news.mvp.model.entity;
+package com.yiqi.news.entity;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 

@@ -6,9 +6,13 @@ import com.jess.arms.integration.IRepositoryManager
 import com.jess.arms.mvp.BaseModel
 
 import com.jess.arms.di.scope.FragmentScope
+import com.yiqi.news.entity.BaseResponse
+import com.yiqi.news.entity.User
 import javax.inject.Inject
 
 import com.yiqi.news.mvp.contract.UserContract
+import com.yiqi.news.mvp.model.api.service.UserService
+import io.reactivex.Observable
 
 
 /**
@@ -27,6 +31,10 @@ import com.yiqi.news.mvp.contract.UserContract
 class UserModel
 @Inject
 constructor(repositoryManager: IRepositoryManager) : BaseModel(repositoryManager), UserContract.Model {
+    override fun getUser(): Observable<BaseResponse<User>> {
+        return mRepositoryManager.obtainRetrofitService(UserService::class.java).userInfo()
+    }
+
     @Inject
     lateinit var mGson: Gson;
     @Inject

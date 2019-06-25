@@ -4,7 +4,6 @@ import com.jess.arms.mvp.IView
 import com.jess.arms.mvp.IModel
 import com.yiqi.news.entity.News
 import com.yiqi.news.entity.NewsResponse
-import com.yiqi.news.mvp.model.entity.BaseResponse
 import io.reactivex.Observable
 
 

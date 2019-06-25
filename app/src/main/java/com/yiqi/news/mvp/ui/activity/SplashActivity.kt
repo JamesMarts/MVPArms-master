@@ -95,7 +95,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View {
     }
 
     override fun showMessage(message: String) {
-        ArmsUtils.snackbarText(message)
+
     }
 
     override fun launchActivity(intent: Intent) {
@@ -120,6 +120,11 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View {
     override fun initImmersionBar() {
         super.initImmersionBar()
         mImmersionBar.fullScreen(true).navigationBarColor(R.color.colorWhite).init()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 
 }

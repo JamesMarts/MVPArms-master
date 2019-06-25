@@ -52,18 +52,18 @@ android {
     signingConfigs {
 
         debug {
-            keyAlias 'huizealias'
-            keyPassword '123456'
-            storePassword '123456'
-            storeFile file('release.keystore')
+            keyAlias 'jucaizhuan'
+            keyPassword 'jucaizhuan'
+            storePassword 'jucaizhuan'
+            storeFile file('news_key')
             v1SigningEnabled true
             v2SigningEnabled true
         }
         release {
-            keyAlias 'huizealias'
-            keyPassword '123456'
-            storePassword '123456'
-            storeFile file('release.keystore')
+            keyAlias 'jucaizhuan'
+            keyPassword 'jucaizhuan'
+            storePassword 'jucaizhuan'
+            storeFile file('news_key')
             v1SigningEnabled true
             v2SigningEnabled true
         }
@@ -75,7 +75,7 @@ android {
             addFieldsAndPlaceholders(it, [
 //                    "BASE_URL": "http://192.168.31.95:8081/yiqi-api/"//汤杰
 //                    "BASE_URL": "http://192.168.1.136:8089/yiqi-api/"//肖佳皓
-                      "BASE_URL": "http://is.snssdk.com/"//刘强
+                      "BASE_URL": "http://192.168.1.120:6060/yiqi-api/"//刘强
             ])
 
             manifestPlaceholders = [

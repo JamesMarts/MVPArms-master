@@ -15,10 +15,12 @@
  */
 package com.yiqi.news.mvp.model.api.service;
 
+import com.yiqi.news.entity.BaseResponse;
 import com.yiqi.news.entity.CommentResponse;
 import com.yiqi.news.entity.NewsDetail;
 import com.yiqi.news.entity.NewsResponse;
 import com.yiqi.news.entity.ResultResponse;
+import com.yiqi.news.entity.User;
 import com.yiqi.news.entity.VideoPathResponse;
 import com.yiqi.news.mvp.model.VideoModel;
 
@@ -97,5 +99,8 @@ public interface CommonService {
 
     @POST("https://www.parsevideo.com/api.php")
     Observable<VideoPathResponse> parseVideo(@Query("url") String url, @Query("hash")String hash);
+
+
+
 
 }

@@ -9,11 +9,11 @@ import com.jess.arms.di.scope.ActivityScope
 import com.jess.arms.mvp.BasePresenter
 import com.jess.arms.http.imageloader.ImageLoader
 import com.yiqi.news.R
+import com.yiqi.news.entity.TabEntity
 import me.jessyan.rxerrorhandler.core.RxErrorHandler
 import javax.inject.Inject
 
 import com.yiqi.news.mvp.contract.MainContract
-import com.yiqi.news.mvp.model.entity.TabEntity
 import com.yiqi.news.mvp.ui.fragment.NewsFragment
 import com.yiqi.news.mvp.ui.fragment.UserFragment
 import com.yiqi.news.mvp.ui.fragment.VideoFragment
